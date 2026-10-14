@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Samjana 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --pink: #f4a7bb;
+  --deep: #7f2849;
+  --cream: #fff8f7;
+  --text: #573745;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #fff3f5, #f9e4ec, #fff8f1);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  animation: fall linear infinite;
+  opacity: .45;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(480deg);
+  }
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 35px 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.page.active {
+  display: flex;
+  animation: appear .65s ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  padding: 34px 25px;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 26px;
+  background: rgba(255,255,255,.76);
+  box-shadow: 0 18px 60px rgba(125,40,73,.10);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow {
+  color: #ad647f;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(37px, 9vw, 57px);
+  line-height: 1.15;
+  color: var(--deep);
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: clamp(29px, 7vw, 39px);
+  color: var(--deep);
+  line-height: 1.2;
+  margin-bottom: 17px;
+}
+
+h3 {
+  color: var(--deep);
+  font-size: 25px;
+  margin-bottom: 13px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.subtitle {
+  max-width: 370px;
+  margin: 0 auto 25px;
+  color: #795966;
+}
+
+.heart {
+  font-size: 42px;
+  display: block;
+  margin-bottom: 20px;
+  animation: heartbeat 1.6s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 25px;
+  margin: 8px 5px 0;
+  background: linear-gradient(135deg, #a63f68, #d87598);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 7px 18px rgba(166,63,104,.18);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(166,63,104,.24);
+}
+
+.btn.secondary {
+  color: var(--deep);
+  background: #fbe8ef;
+  box-shadow: none;
+}
+
+.btn:focus-visible {
+  outline: 3px solid #a63f68;
+  outline-offset: 4px;
+}
+
+.dots {
+  color: #cf8ca4;
+  letter-spacing: 8px;
+  font-size: 12px;
+  margin: 20px 0;
+}
+
+.question {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  color: var(--deep);
+  margin: 20px 0;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.answers .btn {
+  min-width: 115px;
+}
+
+.feedback {
+  margin-top: 20px;
+  color: #a23d67;
+  font-weight: 600;
+  min-height: 28px;
+}
+
+.quote-card {
+  padding: 25px 20px;
+  margin: 18px 0;
+  border-radius: 19px;
+  background: linear-gradient(140deg, #fff7fa, #fff0f3);
+  border: 1px solid #f5d9e3;
+  text-align: left;
+}
+
+.quote-year {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #bc6687;
+  margin-bottom: 12px;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.65;
+  color: #78334f;
+}
+
+.quote-heart {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.gift {
+  font-size: 78px;
+  margin: 20px 0;
+  cursor: pointer;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.letter {
+  text-align: left;
+  background: #fffaf8;
+  padding: 24px 20px;
+  border-radius: 18px;
+  border: 1px solid #f2dce4;
+  white-space: pre-line;
+  font-size: 14px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.signature {
+  margin-top: 22px;
+  text-align: right;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--deep);
+  font-size: 22px;
+}
+
+.video-box {
+  width: 100%;
+  margin: 24px 0;
+  border-radius: 17px;
+  overflow: hidden;
+  background: #2b1520;
+}
+
+video {
+  width: 100%;
+  display: block;
+  max-height: 65vh;
+}
+
+.small-note {
+  font-size: 12px;
+  color: #967481;
+  margin-top: 18px;
+}
+
+.footer {
+  margin-top: 26px;
+  color: #b17b90;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+#musicToggle {
+  position: fixed;
+  z-index: 5;
+  top: 14px;
+  right: 14px;
+  border: 1px solid #f0c8d7;
+  border-radius: 50px;
+  padding: 10px 13px;
+  background: rgba(255,255,255,.9);
+  color: var(--deep);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 27px 18px;
+  }
+  .quote-text {
+    font-size: 18px;
+  }
+  .btn {
+    padding: 12px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<button id="musicToggle" onclick="toggleMusic()" hidden>
+  ♫ Music
+</button>
+
+<audio id="music" loop preload="none">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1: WELCOME -->
+
+<section class="page active" id="page1">
+  <div class="card">
+    <span class="heart">💗</span>
+    <div class="eyebrow">A little something for you</div>
+    <h1>Dear<br>Samjana</h1>
+    <p class="subtitle">
+      Some people make ordinary moments feel special.
+      This little corner of the internet is just for you.
+    </p>
+    <div class="dots">• • •</div>
+    <button class="btn" onclick="startExperience()">
+      Open your surprise ♡
+    </button>
+    <div class="footer">MADE WITH LOVE · SAHIL</div>
+  </div>
+</section>
+
+<!-- PAGE 2: OUR JOURNEY -->
+
+<section class="page" id="page2">
+  <div class="card">
+    <div class="eyebrow">A little journey</div>
+    <h2>Four years.<br>Four little chapters.</h2>
+    <p class="subtitle">
+      Time moves forward, memories stay, and some feelings
+      are difficult to put into words.
+    </p>
+
+    <div class="quote-card">
+      <div class="quote-year">2023 · THE BEGINNING</div>
+      <p class="quote-text">
+        "Somewhere between our first moments and our little
+        conversations, you became someone special to my heart."
+      </p>
+      <span class="quote-heart">♡</span>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-year">2024 · GROWING TOGETHER</div>
+      <p class="quote-text">
+        "Every memory with you became a little piece of happiness
+        that I wish I could keep forever."
+      </p>
+      <span class="quote-heart">♡</span>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-year">2025 · THROUGH EVERYTHING</div>
+      <p class="quote-text">
+        "Even when things aren't perfect, my heart still finds
+        its way back to you."
+      </p>
+      <span class="quote-heart">♡</span>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-year">2026 · MY FAVOURITE FUTURE</div>
+      <p class="quote-text">
+        "If I could choose a thousand times, I'd still choose you—
+        not just for today, but for all the tomorrows I dream of."
+      </p>
+      <span class="quote-heart">♡</span>
+    </div>
+
+    <button class="btn" onclick="goTo(3)">A little game →</button>
+  </div>
+</section>
+
+<!-- PAGE 3: QUESTIONS -->
+
+<section class="page" id="page3">
+  <div class="card">
+    <div class="eyebrow">Just for fun</div>
+    <h2>A few little questions</h2>
+    <p class="subtitle">Let's see if you know what I'm thinking. 💗</p>
+
+    <div id="questionArea">
+      <div class="question" id="questionText">
+        Ready for the first question?
+      </div>
+      <div class="answers" id="answers"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <button class="btn secondary" onclick="goTo(4)">
+      Skip to birthday wishes
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 4: WISHES -->
+
+<section class="page" id="page4">
+  <div class="card">
+    <div class="eyebrow">Today is your day</div>
+    <span class="heart">🎂</span>
+    <h1>Happy<br>Birthday!</h1>
+    <p class="subtitle">
+      May your days be filled with genuine smiles, peaceful
+      moments, beautiful surprises, and people who make you feel
+      loved and appreciated.
+    </p>
+    <p class="subtitle">
+      I hope this new chapter brings you closer to every dream
+      you've been quietly wishing for.
+    </p>
+    <button class="btn" onclick="goTo(5)">There's a gift for you 🎁</button>
+  </div>
+</section>
+
+<!-- PAGE 5: GIFT -->
+
+<section class="page" id="page5">
+  <div class="card">
+    <div class="eyebrow">A tiny surprise</div>
+    <h2>Something from my heart</h2>
+    <p class="subtitle">
+      No expensive wrapping, no grand promises.
+      Just a few words that I wanted you to have.
+    </p>
+    <div class="gift" onclick="openGift()" role="button" aria-label="Open gift">
+      🎁
+    </div>
+    <p id="giftMessage" class="subtitle">
+      Tap the gift to open it.
+    </p>
+    <button class="btn" onclick="goTo(6)">Read my letter 💌</button>
+  </div>
+</section>
+
+<!-- PAGE 6: LETTER -->
+
+<section class="page" id="page6">
+  <div class="card">
+    <div class="eyebrow">From my heart</div>
+    <h2>A letter for you 💌</h2>
+
+    <div class="letter">Dear Love 💗,
+
+🎂 Happy Birthday to you ❤️
+
+May God always bless and prosper you, and may all your wishes come true, my beautiful girl.
+
+I know there are difficulties and misunderstandings in our relationship. Sometimes things between us aren't easy, but I want you to know that my feelings are sincere.
+
+I know I make mistakes unintentionally. I never want my actions to make you feel disrespected or hurt. I'm still learning, and I hope we can always speak honestly and understand each other better.
+
+Life doesn't always go as planned. What matters to me is that we treat each other with kindness, patience, and respect, even when things get difficult.
+
+Dear Love 🌻,
+
+Whether life brings us comfort or challenges, I hope we always remember the good in each other and the memories that made us smile.
+
+"Someone said he liked roses 🌹
+I said I love her."
+
+"Someone said the world was beautiful 🌏
+I said, look at her through my eyes. 👀"
+
+"Someone asked about the future 🪄
+I said, I'm still dreaming of it."
+
+"Someone said loving so much is risky 🚨
+I said, some feelings are worth being honest about."
+
+🫠 If being pretty was illegal, you would be in trouble, my love. 🤧
+
+Finally, it's your day, so Happy Birthday once again! 🏵️
+
+If I have ever hurt you intentionally or unintentionally, I'm sorry. I hope the coming year brings you peace, happiness, success, and countless reasons to smile.
+
+May all your wishes come true.
+
+Lots of love, always. 💗</div>
+
+    <div class="signature">With love, Sahil ♡</div>
+
+    <button class="btn" onclick="goTo(7)">
+      One last memory → 
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 7: VIDEO -->
+
+<section class="page" id="page7">
+  <div class="card">
+    <div class="eyebrow">One last thing</div>
+    <h2>A little moment to remember</h2>
+    <p class="subtitle">
+      Take your time. I wanted to save this moment here for you.
+    </p>
+
+    <div class="video-box">
+      <video id="finalVideo" controls playsinline preload="metadata">
+        <source src="final-video.mp4" type="video/mp4">
+        Your browser doesn't support this video.
+      </video>
+    </div>
+
+    <p class="small-note">
+      If the video doesn't appear, make sure final-video.mp4
+      is uploaded beside index.html.
+    </p>
+
+    <button class="btn" onclick="finishVideo()">One final message ♡</button>
+  </div>
+</section>
+
+<!-- PAGE 8: FINAL MESSAGE -->
+
+<section class="page" id="page8">
+  <div class="card">
+    <span class="heart">🌷</span>
+    <div class="eyebrow">Before you go</div>
+    <h1>Happy Birthday,<br>Samjana.</h1>
+
+    <p class="subtitle">
+      May your wishes come true, may your heart stay hopeful,
+      and may life give you many beautiful reasons to smile.
+    </p>
+
+    <p class="subtitle">
+      No matter what this new year brings, I genuinely wish
+      the very best for you.
+    </p>
+
+    <div class="dots">♡ · ♡ · ♡</div>
+
+    <h3>Lots of love,</h3>
+    <h2>Sahil 💗</h2>
+
+    <p class="small-note">Made especially for you.</p>
+
+    <button class="btn secondary" onclick="restartExperience()">
+      Start again ↺
+    </button>
+  </div>
+</section>
+
+<script>
+const music = document.getElementById('music');
+const musicToggle = document.getElementById('musicToggle');
+const video = document.getElementById('finalVideo');
+
+let musicStarted = false;
+let giftOpened = false;
+
+function goTo(number) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  const target = document.getElementById('page' + number);
+
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (number === 7) {
+    music.pause();
+    musicToggle.textContent = '♫ Music off';
+
+    // Video playback requires the user's tap.
+    // The browser may block automatic playback.
+  }
+
+  if (number === 8) {
+    music.pause();
+    musicToggle.textContent = '♫ Music off';
+  }
+}
+
+async function startExperience() {
+  musicStarted = true;
+  musicToggle.hidden = false;
+
+  try {
+    await music.play();
+    musicToggle.textContent = '♫ Music on';
+  } catch (error) {
+    musicToggle.textContent = '♫ Tap for music';
+  }
+
+  goTo(2);
+}
+
+async function toggleMusic() {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicToggle.textContent = '♫ Music on';
+    } catch (error) {
+      musicToggle.textContent = '♫ Tap for music';
+    }
+  } else {
+    music.pause();
+    musicToggle.textContent = '♫ Music off';
+  }
+}
+
+function openGift() {
+  if (giftOpened) return;
+
+  giftOpened = true;
+
+  document.getElementById('giftMessage').textContent =
+    '🎁 Surprise! You deserve happiness, peace, love, and beautiful things—not only today, but every day. 💗';
+
+  document.querySelector('.gift').textContent = '💝';
+}
+
+function finishVideo() {
+  video.pause();
+  goTo(8);
+}
+
+function restartExperience() {
+  video.pause();
+
+  try {
+    video.currentTime = 0;
+  } catch (error) {}
+
+  goTo(1);
+}
+
+// A few light falling petals
+const petalContainer = document.getElementById('petals');
+const petalSymbols = ['♡', '🌸', '♥'];
+
+for (let i = 0; i < 17; i++) {
+  const petal = document.createElement('span');
+
+  petal.className = 'petal';
+  petal.textContent = petalSymbols[i % petalSymbols.length];
+
+  petal.style.left = Math.random() * 100 + '%';
+  petal.style.fontSize = (10 + Math.random() * 12) + 'px';
+  petal.style.animationDuration = (9 + Math.random() * 13) + 's';
+  petal.style.animationDelay = (-Math.random() * 18) + 's';
+
+  petalContainer.appendChild(petal);
+}
+
+// Romantic questions
+const questions = [
+  {
+    text: 'What makes a memory special?',
+    options: ['The place', 'The person', 'The weather'],
+    answer: 1,
+    correct: 'Sometimes, it is the person who makes an ordinary moment unforgettable. 💗'
+  },
+  {
+    text: 'What is more precious?',
+    options: ['A perfect day', 'An honest heart', 'An expensive gift'],
+    answer: 1,
+    correct: 'An honest heart is something worth appreciating. 🌷'
+  },
+  {
+    text: 'What makes a relationship stronger?',
+    options: ['Understanding', 'Never disagreeing', 'Grand promises'],
+    answer: 0,
+    correct: 'Understanding and kindness matter, even when things are difficult. 🫶'
+  },
+  {
+    text: 'What do I wish for you today?',
+    options: ['More presents', 'More happiness', 'More homework'],
+    answer: 1,
+    correct: 'More happiness, beautiful memories, and every good thing you deserve. 🎂'
+  },
+  {
+    text: 'Ready for your birthday wish?',
+    options: ['Yes 💗', 'Absolutely 💗', 'Let’s go 💗'],
+    answer: 0,
+    correct: 'Then let the birthday wishes begin! 🎉'
+  }
+];
+
+let questionIndex = 0;
+let answered = false;
+
+function renderQuestion() {
+  const q = questions[questionIndex];
+
+  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('answers').innerHTML = '';
+  answered = false;
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+
+    button.className = 'btn secondary';
+    button.textContent = option;
+
+    button.addEventListener('click', () => answerQuestion(index));
+
+    document.getElementById('answers').appendChild(button);
+  });
+}
+
+function answerQuestion(index) {
+  if (answered) return;
+
+  answered = true;
+
+  const q = questions[questionIndex];
+
+  document.getElementById('feedback').textContent =
+    q.correct;
+
+  const buttons = document.querySelectorAll('#answers button');
+  buttons.forEach(button => {
+    button.disabled = true;
+    button.style.opacity = '.65';
+  });
+
+  const nextButton = document.createElement('button');
+  nextButton.className = 'btn';
+  nextButton.textContent =
+    questionIndex < questions.length - 1
+      ? 'Next question →'
+      : 'Birthday wishes →';
+
+  nextButton.onclick = () => {
+    questionIndex++;
+
+    if (questionIndex < questions.length) {
+      renderQuestion();
+    } else {
+      goTo(4);
+    }
+  };
+
+  document.getElementById('answers').appendChild(nextButton);
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
